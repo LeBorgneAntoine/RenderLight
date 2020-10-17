@@ -3,6 +3,7 @@ package run;
 import javax.swing.*;
 import java.awt.*;
 import display.*;
+import render.LightRender;
 
 
 public class TestLightRender extends JFrame {
@@ -27,11 +28,19 @@ public class TestLightRender extends JFrame {
         //=============================================
 
         this.screen = new ScreenDisplay();
-        this.screen.addShape(new shape.Line(100,300,800,550));
+
+
 
 
         //=============================================
-        //             ADDING COMPONENT
+        //             INIT COMPONENTS
+        //=============================================
+
+        this.screen.addShape(new shape.Line(100,300,800,550));
+        this.screen.addLigthPoint(new LightRender(300,300,200,100,screen));
+
+        //=============================================
+        //             ADDING COMPONENTS
         //=============================================
         this.add(this.screen);
 
