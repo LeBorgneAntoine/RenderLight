@@ -1,10 +1,13 @@
 package render;
 
+import util.Vector;
+
 import java.awt.*;
 
 public class LightRender {
 
     private int posX,posY,radius,points;
+    Vector lightPoint;
 
     //==============================================================
     //                      CONSTRUCTOR
@@ -24,6 +27,14 @@ public class LightRender {
         this.posY = posY;
         this.radius = radius;
         this.points = points;
+    }
+
+    public void createLightPoint(){
+        this.lightPoint = new Vector(posX,posY);
+
+
+
+
     }
 
     //==============================================================
@@ -67,7 +78,13 @@ public class LightRender {
     //==============================================================
 
 
+    private Vector isStopAt(int size,Vector start,Vector end){
 
+
+        return new Vector(1,1);
+
+
+    }
 
 
 

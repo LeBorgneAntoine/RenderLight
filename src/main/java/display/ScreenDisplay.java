@@ -6,21 +6,25 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class screenDisplay extends JPanel {
+public class ScreenDisplay extends JPanel {
 
-    ArrayList<Shape> shapeList;
+    private ArrayList<Shape> shapeList;
 
-    public screenDisplay() {
+    public ScreenDisplay() {
         this.shapeList = new ArrayList<Shape>();
+
+
+
+    }
+
+    public void addShape(Shape shape){
+        this.shapeList.add(shape);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-
-
-
 
 
     }

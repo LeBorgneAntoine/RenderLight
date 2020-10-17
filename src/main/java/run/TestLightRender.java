@@ -1,8 +1,13 @@
+package run;
+
 import javax.swing.*;
 import java.awt.*;
+import display.*;
+
 
 public class TestLightRender extends JFrame {
 
+    ScreenDisplay screen;
 
     public TestLightRender() throws HeadlessException {
         this.init();
@@ -20,8 +25,9 @@ public class TestLightRender extends JFrame {
         //            PANEL INIT
         //=============================================
 
-
-
+        this.screen = new ScreenDisplay();
+        this.screen.addShape(new shape.Line(4,5,60,80));
+        this.add(this.screen);
 
 
 
