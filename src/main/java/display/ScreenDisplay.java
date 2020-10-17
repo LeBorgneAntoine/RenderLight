@@ -1,6 +1,7 @@
 package display;
 
 import shape.Shape;
+import style.StyleScreen;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,9 +12,13 @@ public class ScreenDisplay extends JPanel {
     private ArrayList<Shape> shapeList;
 
     public ScreenDisplay() {
-        this.shapeList = new ArrayList<Shape>();
+        this.shapeList = new ArrayList<>();
 
+        //=================================
+        //             SET STYLE
+        //=================================
 
+        this.setBackground(StyleScreen.BACKGROUND);
 
     }
 
@@ -25,6 +30,11 @@ public class ScreenDisplay extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+
+
+        for(Shape shape : shapeList){
+            shape.render(g2);
+        }
 
 
     }

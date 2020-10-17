@@ -19,14 +19,20 @@ public class TestLightRender extends JFrame {
         //            WINDOW INIT
         //=============================================
 
-        this.setPreferredSize(new Dimension(800,800));
+        this.setPreferredSize(new Dimension(1000,600));
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //=============================================
         //            PANEL INIT
         //=============================================
 
         this.screen = new ScreenDisplay();
-        this.screen.addShape(new shape.Line(4,5,60,80));
+        this.screen.addShape(new shape.Line(100,300,800,550));
+
+
+        //=============================================
+        //             ADDING COMPONENT
+        //=============================================
         this.add(this.screen);
 
 
