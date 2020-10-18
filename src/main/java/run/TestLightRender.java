@@ -41,7 +41,7 @@ public class TestLightRender extends JFrame {
         //this.screen.addShape(new shape.Line(500,300,500,100,screen));
         //this.screen.addShape(new shape.Line(300,300,300,550));
         this.screen.addShape(new shape.Rectange(100,200,100,200,screen));
-        LightRender rd = new LightRender(300,300,300,200,screen);
+        LightRender rd = new LightRender(300,300,300,10,screen);
         this.screen.addLigthPoint(rd);
 
 

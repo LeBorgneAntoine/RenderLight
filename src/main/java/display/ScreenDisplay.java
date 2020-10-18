@@ -65,7 +65,7 @@ public class ScreenDisplay extends JPanel {
 
         for (Shape shape : shapeList) {
             shape.render(g2);
-            shape.moving();
+
         }
 
 

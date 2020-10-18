@@ -93,13 +93,41 @@ public class LightRender {
             int x = (int) (lightPoint.x + getRadius()*Math.sin(angle));
             int y = (int) (lightPoint.y + getRadius()*Math.cos(angle));
 
+
+            ArrayList<Vector> possiblePoints = new ArrayList<>();
+
             for(shape.Shape shape : screen.getShapeList()){
                 for(int i = 0;i<shape.pointsList.size()-1;i++){
 
-                    this.castRay.add(correctedPoint(lightPoint,new Vector(x,y),shape.pointsList.get(i),shape.pointsList.get(i+1)));
+                    possiblePoints.add(correctedPoint(lightPoint,new Vector(x,y),shape.pointsList.get(i),shape.pointsList.get(i+1)));
+
+                }
+
+                possiblePoints.add(correctedPoint(lightPoint,new Vector(x,y),shape.pointsList.get(0),shape.pointsList.get(shape.pointsList.size()-1)));
+
+
+
+
+            }
+
+            Vector closest = possiblePoints.get(0);
+            double distance = calculateDistanceBetween(lightPoint,closest);
+
+            for(Vector point : possiblePoints){
+
+
+                if(distance >= calculateDistanceBetween(lightPoint,closest)){
+                    closest = point;
+                    distance = calculateDistanceBetween(lightPoint,closest);
                 }
 
             }
+            System.out.println(distance);
+
+            this.castRay.add(closest);
+
+
+
 
 
         }
@@ -126,9 +154,20 @@ public class LightRender {
 
         double u = -( (pt1.x - pt2.x)*(pt1.y - pt3.y) - (pt1.y - pt2.y)*(pt1.x - pt3.x) )/denominator;
 
-
         if(t >= 0 && t<=1 && u>=0 && u<=1) return new Vector(pt1.x + t*(pt2.x - pt1.x), pt1.y + t*(pt2.y - pt1.y));
-        return pt2;
+        return pt1;
+    }
+
+
+    /**
+     * calculate the distance between two points
+     *
+     * @param pt1 first point
+     * @param pt2 second point
+     * @return the distance between the points
+     */
+    private double calculateDistanceBetween(Vector pt1, Vector pt2){
+        return Math.sqrt(Math.pow(  (pt2.x - pt1.x)  ,2)-Math.pow(  (pt2.y - pt1.y)  ,2));
     }
 
     //==============================================================
