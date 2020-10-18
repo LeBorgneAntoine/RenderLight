@@ -73,11 +73,19 @@ public class LightRender {
         this.points = points;
     }
 
+    public void clearPoints(){
+        this.castRay = new ArrayList<>();
+    }
+
     //==============================================================
     //                         RAY CAST CACLULATE
     //==============================================================
 
 
+    /**
+     * update the position of the ray casting modified by the environment
+     *
+     */
     private void updateCast(){
 
         for (double angle = 0; angle <= 360; angle += (360/getPoints())) {
@@ -99,33 +107,29 @@ public class LightRender {
     }
 
 
+    /**
+     * calculate the point of intersection between two lines
+     *
+     *
+     *
+     * @param pt1 first point of the first line
+     * @param pt2 second point of the first line
+     * @param pt3 first point of the  second line
+     * @param pt4 second point of the second line
+     * @return the point of intersection if there is, or pt2 if not
+     */
     private Vector correctedPoint(Vector pt1,Vector pt2,Vector pt3, Vector pt4){
 
+        double denominator = (  (pt1.x - pt2.x)*(pt3.y - pt4.y) - (pt1.y - pt2.y)*(pt3.x - pt4.x)  );
 
-        double t = ( (pt1.x - pt3.x)*(pt3.y - pt4.y) - (pt1.y - pt3.y)*(pt3.x - pt4.x) )/(  (pt1.x - pt2.x)*(pt3.y - pt4.y) - (pt1.y - pt2.y)*(pt3.x - pt4.x)  );
+        double t = ( (pt1.x - pt3.x)*(pt3.y - pt4.y) - (pt1.y - pt3.y)*(pt3.x - pt4.x) )/denominator;
 
-        double u = -( (pt1.x - pt2.x)*(pt1.y - pt3.y) - (pt1.y - pt2.y)*(pt1.x - pt3.x) )/(  (pt1.x - pt2.x)*(pt3.y - pt4.y) - (pt1.y - pt2.y)*(pt3.x - pt4.x)  );
+        double u = -( (pt1.x - pt2.x)*(pt1.y - pt3.y) - (pt1.y - pt2.y)*(pt1.x - pt3.x) )/denominator;
 
-        ;
 
-        if(t >= 0 && t<=1) return new Vector(pt1.x + t*(pt2.x - pt1.x), pt1.y + t*(pt2.y - pt1.y));
-        //if(0.0 <= u && u <= 1.0)return  new Vector(pt3.x + t*(pt4.x - pt3.x), pt3.y + t*(pt4.y - pt3.y));
+        if(t >= 0 && t<=1 && u>=0 && u<=1) return new Vector(pt1.x + t*(pt2.x - pt1.x), pt1.y + t*(pt2.y - pt1.y));
         return pt2;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     //==============================================================
     //                          DISPLAY
@@ -153,10 +157,11 @@ public class LightRender {
 
         updateCast();
         g2.setColor(StyleScreen.LIGHT);
-        g2.setStroke(new BasicStroke(3));
+        g2.setStroke(new BasicStroke(1));
         for(Vector ray : castRay){
             g2.drawLine((int)lightPoint.x,(int)lightPoint.y,(int)ray.x,(int)ray.y);
         }
+        this.clearPoints();
 
 
     }

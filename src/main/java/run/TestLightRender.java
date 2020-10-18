@@ -12,6 +12,7 @@ public class TestLightRender extends JFrame {
 
     public TestLightRender() throws HeadlessException {
         this.init();
+
     }
 
     private void init() {
@@ -36,8 +37,16 @@ public class TestLightRender extends JFrame {
         //             INIT COMPONENTS
         //=============================================
 
-        this.screen.addShape(new shape.Line(100,300,800,550));
-        this.screen.addLigthPoint(new LightRender(300,300,200,100,screen));
+
+        //this.screen.addShape(new shape.Line(500,300,500,100,screen));
+        //this.screen.addShape(new shape.Line(300,300,300,550));
+        this.screen.addShape(new shape.Rectange(100,200,100,200,screen));
+        LightRender rd = new LightRender(300,300,300,200,screen);
+        this.screen.addLigthPoint(rd);
+
+
+
+
 
         //=============================================
         //             ADDING COMPONENTS
@@ -51,6 +60,7 @@ public class TestLightRender extends JFrame {
 
     public static void main(String[] args){
         new TestLightRender().setVisible(true);
+
     }
 
 }

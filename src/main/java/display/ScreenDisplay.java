@@ -23,6 +23,15 @@ public class ScreenDisplay extends JPanel {
 
         this.setBackground(StyleScreen.BACKGROUND);
 
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                for(;;)
+                repaint();
+            }
+        }.start();
+
     }
 
     public void addShape(Shape shape){
@@ -42,14 +51,25 @@ public class ScreenDisplay extends JPanel {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
-        for (LightRender lr : lightPoints){
+
+        for (LightRender lr : lightPoints) {
+            PointerInfo a = MouseInfo.getPointerInfo();
+            Point b = a.getLocation();
+            int x = (int) b.getX();
+            int y = (int) b.getY();
+
+            lr.update(x, y);
             lr.render(g2);
         }
 
 
-        for(Shape shape : shapeList){
+        for (Shape shape : shapeList) {
             shape.render(g2);
+            shape.moving();
         }
+
+
+
 
 
     }
